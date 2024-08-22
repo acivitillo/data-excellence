@@ -1,0 +1,14 @@
+site_name: data delivery excellence
+site_url: https://mydomain.org/
+nav:
+  - Home: index.md
+  - Marts: 
+    - Executive Overview: marts/overview.md
+    - Ingestions: marts/ingestions.md
+    - Modelling: marts/modelling.md
+
+theme:
+  name: material
+  features:
+    - navigation.path
+    - navigation.tabs
