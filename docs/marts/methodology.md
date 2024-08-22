@@ -4,13 +4,23 @@ Something
 
 # Gates
 
-## Gate 0 - Scoping
+![gates](/assets/images/gates.png)
 
-Ciprian to add here
+## Gate 1 Metrics
 
-## Gate 1 - Developing the ingestion
+The goal of this gate is ...
 
-## Gate 2 - Deploying the ingestion
+### IT Workshop
+
+Typical Agenda is
+
+### Metrics Workshop
+
+Typical Agenda is
+
+## Gate 2 Marts
+
+## Gate 3 Reports
 
 ## Templates
 

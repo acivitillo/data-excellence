@@ -4,11 +4,30 @@ nav:
   - Home: index.md
   - Marts: 
     - Executive Overview: marts/overview.md
-    - Ingestions: marts/ingestions.md
-    - Modelling: marts/modelling.md
-
+    - Methodology: marts/methodology.md
+    - Operating Models: marts/op_models.md
+    - Roles: marts/roles.md
+  - Organizzation: 
+    - Executive Overview: organizzation/overview.md
+    - Methodology: organizzation/methodology.md
+    - Operating Models: organizzation/op_models.md
+    - Roles: organizzation/roles.md
+  - Data Governance: 
+    - Executive Overview: data_governance/overview.md
+    - Methodology: data_governance/methodology.md
+    - Operating Models: data_governance/op_model.md
+    - Roles: data_governance/roles.md
+  - Data Platform: 
+    - Executive Overview: data_platform/overview.md
+    - Orchestration: data_platform/orchestration.md
+    - Ingestion: data_platform/ingestion.md
+    - Roles: data_platform/roles.md
 theme:
   name: material
   features:
     - navigation.path
     - navigation.tabs
+    - navigation.expand
+markdown_extensions:
+  - toc:
+      permalink: true
