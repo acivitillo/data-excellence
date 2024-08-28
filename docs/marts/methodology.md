@@ -4,7 +4,7 @@ Something
 
 # Gates
 
-![gates](/assets/images/gates.png)
+![gates](/data-excellence/assets/images/gates.png)
 
 ## Gate 1 Metrics
 

@@ -1,5 +1,7 @@
 site_name: data delivery excellence
 site_url: https://mydomain.org/
+repo_name: dyvenia/data-excellence
+repo_url: https://github.com/dyvenia/data-excellence
 nav:
   - Home: index.md
   - Marts: 
