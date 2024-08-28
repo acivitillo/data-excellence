@@ -1,4 +1,4 @@
-site_name: data delivery excellence
+site_name: datakb
 site_url: https://mydomain.org/
 repo_name: dyvenia/data-excellence
 repo_url: https://github.com/dyvenia/data-excellence
@@ -23,9 +23,12 @@ nav:
     - Executive Overview: data_platform/overview.md
     - Orchestration: data_platform/orchestration.md
     - Ingestion: data_platform/ingestion.md
+    - Integrations: data_platform/integrations.md
     - Roles: data_platform/roles.md
 theme:
   name: material
+  palette:
+    primary: deep purple
   features:
     - navigation.path
     - navigation.tabs
@@ -33,3 +36,8 @@ theme:
 markdown_extensions:
   - toc:
       permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
