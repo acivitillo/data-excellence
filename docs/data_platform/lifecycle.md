@@ -63,7 +63,7 @@ graph TB
     style Software_Engineering fill:#c8dbda,stroke:#000,stroke-width:1px
 
 ```
-![data-engineering-lifecycle](image-data-engineering-lifecycle.png)
+![data-engineering-lifecycle](../assets/data-platform_data-engineering-lifecycle.png)
 
 ---
 
@@ -78,6 +78,8 @@ Data generation is the first step in the lifecycle, where raw data is created or
 - **Manual Input**: Data entered by users or operators.
 
 **Diagram Placeholder: Data Generation Process**
+![data generation - application database](../assets/data-platform_data-generation-application-database.png)
+![data generation - IoT swarm and message queue](../assets/data-platform_data-generation-iot-swarm-and-message-queue.png)
 
 ---
 
@@ -89,8 +91,6 @@ Data storage is the foundational component where all ingested and processed data
 - **Choosing Storage Systems**: Selecting between data warehouses, lakes, and object storage.
 - **Partitioning and Indexing**: Organizing data for faster access.
 - **Security and Compliance**: Ensuring data is encrypted and stored in compliance with regulatory requirements.
-
-**Diagram Placeholder: Data Storage Systems**
 
 ---
 
@@ -117,8 +117,6 @@ Data transformation is where the raw data is cleaned, structured, and enriched t
 - **Aggregations and Calculations**: Summing, averaging, or transforming data based on business rules.
 - **ETL/ELT**: Extracting, transforming, and loading data for consumption.
 
-**Diagram Placeholder: Data Transformation Workflow**
-
 ---
 
 ### 5. **Data Serving**
@@ -131,8 +129,6 @@ Once the data is transformed, it needs to be made available for use in real-time
 - **Data Lakes**: Providing storage for large volumes of raw or semi-structured data.
 - **Caching and Indexing**: Optimizing data for fast retrieval.
 
-**Diagram Placeholder: Data Serving Architecture**
-
 ---
 
 ### 6. **Analytics**
@@ -143,8 +139,6 @@ After data is stored and made available, it is used for analytics to extract ins
 - **BI Tools**: Generating reports and dashboards using tools like PowerBI, Tableau, or Looker.
 - **Exploratory Data Analysis**: Querying data to find patterns, trends, and insights.
 - **KPI Tracking**: Monitoring key performance indicators through dashboards.
-
-**Diagram Placeholder: Data Analytics Flow**
 
 ---
 
@@ -158,8 +152,6 @@ Machine learning is an optional stage in the data engineering lifecycle. Not all
 - **Model Deployment**: Putting machine learning models into production to make predictions in real time.
 - **Monitoring Models**: Tracking model performance over time and ensuring they are accurate and reliable.
 
-**Diagram Placeholder: Machine Learning Lifecycle**
-
 ---
 
 ### 8. **Reverse ETL**
@@ -172,6 +164,7 @@ Reverse ETL is the process of moving data from your centralized data warehouse o
 - **Data Enrichment**: Enhancing third-party tools with enriched or aggregated data from internal systems.
 
 **Diagram Placeholder: Reverse ETL Process**
+![Reverse ETL](../assets/data-platform_reverse-etl.png)
 
 ---
 
