@@ -21,9 +21,11 @@ nav:
     - Roles: data_governance/roles.md
   - Data Platform: 
     - Executive Overview: data_platform/overview.md
-    - Orchestration: data_platform/orchestration.md
+    - Methodology:
+      - CI/CD: data_platform/cicd.md
+      - Orchestration: data_platform/orchestration.md
+      - Integrations: data_platform/integrations.md
     - Ingestion: data_platform/ingestion.md
-    - Integrations: data_platform/integrations.md
     - Roles: data_platform/roles.md
 theme:
   name: material
