@@ -11,58 +11,6 @@ The data engineering lifecycle is supported by several critical undercurrents, i
 
 **Diagram Placeholder: Data Engineering Lifecycle to be replaced**
 
-``` mermaid
-graph TB
-    %% Main data engineering lifecycle
-    subgraph Data Engineering Lifecycle
-        Generation --> Ingestion
-        Ingestion --> Transformation
-        Transformation --> Serving
-        subgraph Storage
-        end
-        Serving --> Analytics
-        Serving --> Machine_Learning
-        Serving --> Reverse_ETL
-    end
-
-    %% Define nodes
-    Generation[Generation]
-    Ingestion[Ingestion]
-    Transformation[Transformation]
-    Serving[Serving]
-    Analytics[Analytics]
-    Machine_Learning[Machine Learning]
-    Reverse_ETL[Reverse ETL]
-
-    %% Undercurrents placed below, not connected with arrow
-    subgraph Undercurrents
-        direction LR
-        Security[Security] 
-        Data_Management[Data management]
-        DataOps[DataOps]
-        Data_Architecture[Data architecture]
-        Orchestration[Orchestration]
-        Software_Engineering[Software engineering]
-    end
-
-    %% Styling nodes with colors
-    style Generation fill:#e07b73,stroke:#000,stroke-width:2px
-    style Ingestion fill:#6fbf73,stroke:#000,stroke-width:2px
-    style Transformation fill:#ab6ebd,stroke:#000,stroke-width:2px
-    style Serving fill:#4682b4,stroke:#000,stroke-width:2px
-    style Analytics fill:#ffd700,stroke:#000,stroke-width:2px
-    style Machine_Learning fill:#ffd700,stroke:#000,stroke-width:2px
-    style Reverse_ETL fill:#ffd700,stroke:#000,stroke-width:2px
-
-    %% Styling undercurrents with colors
-    style Security fill:#d088d8,stroke:#000,stroke-width:1px
-    style Data_Management fill:#a9c5db,stroke:#000,stroke-width:1px
-    style DataOps fill:#f8e38d,stroke:#000,stroke-width:1px
-    style Data_Architecture fill:#ceda99,stroke:#000,stroke-width:1px
-    style Orchestration fill:#d99488,stroke:#000,stroke-width:1px
-    style Software_Engineering fill:#c8dbda,stroke:#000,stroke-width:1px
-
-```
 ![data-engineering-lifecycle](../assets/data-platform_data-engineering-lifecycle.png)
 
 ---
