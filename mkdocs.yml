@@ -11,11 +11,11 @@ nav:
     - Methodology: marts/methodology.md
     - Operating Models: marts/op_models.md
     - Roles: marts/roles.md
-  - Organizzation: 
-    - Executive Overview: organizzation/overview.md
-    - Methodology: organizzation/methodology.md
-    - Operating Models: organizzation/op_models.md
-    - Roles: organizzation/roles.md
+  - Organization: 
+    - Executive Overview: organization/overview.md
+    - Methodology: organization/methodology.md
+    - Operating Models: organization/op_models.md
+    - Roles: organization/roles.md
   - Data Governance: 
     - Executive Overview: data_governance/overview.md
     - Methodology: data_governance/methodology.md
