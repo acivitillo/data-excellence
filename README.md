@@ -1,16 +1,27 @@
 # data-excellence
 
-Opinionated **Data Knowledge Base**..
+Opinionated **Data Knowledge Base**.
 
 Link of documentation is [here](https://datakb.com)
 
-## Setup Local Env
+## Running the docs locally
 
-Built with MKDocs. In order to build docs locally, you must install the following libs:
+### 1. Install Rye
 
 ```bash
-pymdownx-extensions
-mkdocs-material
+curl -sSf https://rye.astral.sh/get | bash
 ```
 
-After that you can review the local changes in your browser with ```mkdocs serve```.
+### 2. Install dependencies
+
+```bash
+rye sync
+```
+
+### 3. Run the docs
+
+```bash
+rye run mkdocs serve
+```
+
+The docs will be available at http://127.0.0.1:8000/ (Ctrl+left click to open).
