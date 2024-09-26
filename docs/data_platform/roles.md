@@ -3,7 +3,7 @@
 In modern organizations, various roles contribute to the design, development, and operation of data-driven systems. These roles collaborate to ensure that data flows smoothly through its lifecycle, from generation to consumption in analytics, machine learning, and business processes. Data engineers act as a crucial link between upstream data producers and downstream data consumers, enabling a seamless data engineering flow.
 
 **Diagram Placeholder: Data engineering roles**
-![Data engineering roles](../assets/data-platform_data-engineering-roles.png)
+![Data engineering roles](../assets/images/data-platform_data-engineering-roles.png)
 
 Below is an overview of the key roles and their responsibilities. A single person can take on multiple roles, but it's important to distinguish them within the broader organizational landscape.
 
