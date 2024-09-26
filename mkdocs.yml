@@ -22,6 +22,8 @@ nav:
   - Data Platform: 
     - Executive Overview: data_platform/overview.md
     - Methodology:
+      - Methodology Overview: data_platform/methodology_overview.md
+      - Infrastructure as Code (IaC): data_platform/iac.md
       - CI/CD: data_platform/cicd.md
       - Orchestration: data_platform/orchestration.md
       - Integrations: data_platform/integrations.md

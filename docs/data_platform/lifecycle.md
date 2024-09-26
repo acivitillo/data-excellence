@@ -11,7 +11,7 @@ The data engineering lifecycle is supported by several critical undercurrents, i
 
 **Diagram Placeholder: Data Engineering Lifecycle to be replaced**
 
-![data-engineering-lifecycle](../assets/data-platform_data-engineering-lifecycle.png)
+![data-engineering-lifecycle](../assets/images/data-platform_data-engineering-lifecycle.png)
 
 ---
 
@@ -26,8 +26,8 @@ Data generation is the first step in the lifecycle, where raw data is created or
 - **Manual Input**: Data entered by users or operators.
 
 **Diagram Placeholder: Data Generation Process**
-![data generation - application database](../assets/data-platform_data-generation-application-database.png)
-![data generation - IoT swarm and message queue](../assets/data-platform_data-generation-iot-swarm-and-message-queue.png)
+![data generation - application database](../assets/images/data-platform_data-generation-application-database.png)
+![data generation - IoT swarm and message queue](../assets/images/data-platform_data-generation-iot-swarm-and-message-queue.png)
 
 ---
 
@@ -112,7 +112,7 @@ Reverse ETL is the process of moving data from your centralized data warehouse o
 - **Data Enrichment**: Enhancing third-party tools with enriched or aggregated data from internal systems.
 
 **Diagram Placeholder: Reverse ETL Process**
-![Reverse ETL](../assets/data-platform_reverse-etl.png)
+![Reverse ETL](../assets/images/data-platform_reverse-etl.png)
 
 ---
 
