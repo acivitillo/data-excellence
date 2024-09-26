@@ -2,6 +2,8 @@ site_name: datakb
 site_url: https://mydomain.org/
 repo_name: dyvenia/data-excellence
 repo_url: https://github.com/dyvenia/data-excellence
+edit_uri: blob/main/docs/
+
 nav:
   - Home: index.md
   - Marts: 
@@ -9,11 +11,11 @@ nav:
     - Methodology: marts/methodology.md
     - Operating Models: marts/op_models.md
     - Roles: marts/roles.md
-  - Organizzation: 
-    - Executive Overview: organizzation/overview.md
-    - Methodology: organizzation/methodology.md
-    - Operating Models: organizzation/op_models.md
-    - Roles: organizzation/roles.md
+  - Organization: 
+    - Executive Overview: organization/overview.md
+    - Methodology: organization/methodology.md
+    - Operating Models: organization/op_models.md
+    - Roles: organization/roles.md
   - Data Governance: 
     - Executive Overview: data_governance/overview.md
     - Methodology: data_governance/methodology.md
@@ -27,21 +29,114 @@ nav:
       - CI/CD: data_platform/cicd.md
       - Orchestration: data_platform/orchestration.md
       - Integrations: data_platform/integrations.md
+      - Data Platform and Data Maturity: data_platform/data_maturity.md
     - Ingestion: data_platform/ingestion.md
     - Roles: data_platform/roles.md
 theme:
-  name: material
+  name: "material"
   palette:
-    primary: deep purple
+    - scheme: default
+      primary: deep purple
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  font:
+    text: Open Sans
+    code: Fira Code
+  logo: _static/logo.png
+  favicon: _static/logo.png
   features:
-    - navigation.path
     - navigation.tabs
-    - navigation.expand
+    - navigation.tabs.sticky
+    - navigation.top
+    - content.code.copy
+    - navigation.tracking
+    - toc.follow
+    - toc.integrate
+    - content.action.view
+    - content.action.edit
+    - announce.dismiss
+    - content.tooltips
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+  custom_dir: docs/overrides
+
+plugins:
+  - search
+  - include_dir_to_nav
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_root_heading: yes
+            docstring_style: google
+  - mike
+  - neoteroi.mkdocsoad:
+      use_pymdownx: true
+  - mkdocs-jupyter
+  - table-reader
+  - include-markdown:
+      cache: 600
+  - social
+  - git-revision-date
+  - glightbox
+
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+  - javascripts/katex.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
 markdown_extensions:
-  - toc:
-      permalink: true
+  - pymdownx.highlight:
+      linenums: true
   - pymdownx.superfences:
+      preserve_tabs: true
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.smartsymbols
+  - pymdownx.keys
+  - pymdownx.tilde
+  - pymdownx.blocks.tab:
+      alternate_style: True
+  - admonition
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - abbr
+  - pymdownx.snippets
+  - def_list
+  - footnotes
+  - tables
+  - attr_list
+  - md_in_html
+
+copyright: Copyright &copy; 2024 <a href="https://dyvenia.com/">dyvenia</a>
+
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/dyvenia/viadot
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/dyvenia
+    - icon: fontawesome/regular/envelope
+      link: mailto:hello@dyvenia.com
+      name: hello@dyvenia.com

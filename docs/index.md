@@ -20,6 +20,6 @@ This is an opinionated guide, and we follow strictly the following principles:
 | **Area**        | **Docs Owner**    |                                                   |
 |-----------------|-------------------|---------------------------------------------------|
 | Marts           | Marcin Socha      | [link](/data-excellence/marts/overview)           |
-| Organization    | Maro Sola         | [link](/data-excellence/organizzation/overview)   |
+| Organization    | Maro Sola         | [link](/data-excellence/organization/overview)   |
 | Data Governance | Alessio Civitillo | [link](/data-excellence/data_governance/overview) |
 | Data Platform   | Karol Wolski      | [link](/data-excellence/data_platform/overview)   |
