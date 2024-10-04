@@ -10,7 +10,7 @@ We should start with creating or configuring a GitHub repository for a project. 
 
 There are more options worth considering, but they should be applied according to project's needs.
 
-2. Create GitHub Workflows
+2. Create GitHub CI Workflow - code validation
 All GitHub Actions workflows should be stored in `.github/workflows` folder, where we can define multiple workflows. For our CI/CD pipeline we can start with such `on` clause:
 ```
 on:
@@ -62,6 +62,8 @@ Inside, we can put basic CI checks, depending on technology we are using, below 
 
 Such workflow can be save within `ci.yml` file, and validate_dbt_project can be added to `Status checks that are required` explained in previous step. The thing that need to be watched out here is the fact, that `ci.yml` might not be executed for every change. To enable mandatory check, it's better to run such CI for every pull request.
 
+3. Docker image build & push GitHub CI workflow
+
 In separate workflow file CD part can be prepared, where basic setup is focused on building and pushing docker image. `on` clause can be set to be executed only on main branch, or we can have separate job that will build docker image on pull request, with `push` being enabled only on main. Better approach is to check build process already on pull_request, that's why below pipeline will be used both for `pull_request` and `push`:
 ```
 name: Build and Push Docker Image
@@ -104,9 +106,146 @@ jobs:
 ```
 This way on every change in our pull request, docker image will be build only, and once we are comfortable, after merging changed to `main`, push will happen to GitHub Container Registry (ghcr). In order to use image already on non-prod environment before merging changes, there is an option to modify tagging of the images, where we can use branch name as a tag on pull request, while using proper tagging for pushed changes to main.
 
-Similarly we can handle lint, package and push process for helm charts. In pull request we can use chart-testing (ct) library that will validate correctness of our yml files, and once we are sure that it's working as expected, workflow executed on main branch should package and push helm chart.
+4. Helm Chart Workflow
 
-3. 
+Similarly to docker images, we can handle lint, package and push process for helm charts. In pull request we can use chart-testing (ct) library that will validate correctness of our yml files, and once we are sure that it's working as expected, workflow executed on main branch should package and push helm chart.
+
+In case of reusing Helm chart in multiple projects/repositories, it is good practise to have dedicated repository that will keep helm chart only, and in project repository there should be only helm values file located. It is not a convenient option in highly customized helm charts, where even small change requires upgrading chart. But in most cases only values should be enough to be modified, with bigger changes happening more because of security issues than feature requests.
+
+Workflow for Helm Lint, Package and Push, where lint will be executed on both pull request and push, while helm package and push only on main branch workflows. [CT (chart testing)](https://github.com/helm/chart-testing) is used to validate syntax of helm charts. It can optionally also verify additional things, like incrementing of the helm chart version every time some change was introduced:
+```
+name: Helm Lint, Package and Push
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'charts/**'
+
+jobs:
+  lint-test:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.0
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4.2.0
+        with:
+          version: v3.16.1
+
+      - uses: actions/setup-python@v5.2.0
+        with:
+          python-version: '3.12'
+          check-latest: true
+
+      - name: Add necessary dependencies
+        run: |
+            #!/bin/bash
+            helm repo add ${{ vars.CHART_REGISTRY_NAME }} https://{{ vars.CHART_REGISTRY_URL }} --username '${{ secrets.CHART_REGISTRY_USER }}' --password '${{ secrets.CHART_REGISTRY_PASSWORD }}'
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+
+      - name: Run chart-testing (lint)
+        run: |
+          ct lint --target-branch ${{ github.event.repository.default_branch }} --check-version-increment=${{ vars.version_increment }}
+```
+
+For helm push we can introduce mechanism that will push only helm charts that are modified. Usage of [GitHub action dorny/paths-filter](https://github.com/dorny/paths-filter) can help with that. It's not mandatory step though, so below code is just assuming that helm package needs to be prepared and pushed. In addition, it is assumed that Chart Museum is used to store all helm charts and [GitHub action helm-push-action](https://github.com/Goodsmileduck/helm-push-action) is used for that:
+
+```
+  helm_push:
+      name: "$Helm Push"
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - uses: dyvenia/helm-push-action@master
+          env:
+            HELM_EXPERIMENTAL_OCI: 1
+            SOURCE_DIR: './charts'
+            CHARTMUSEUM_REPO_NAME: ${{ vars.REPOSITORY_NAME }}
+            CHART_FOLDER: ${{ matrix.directory }}
+            CHARTMUSEUM_URL: '${{ vars.CHART_REGISTRY_URL }}'
+            CHARTMUSEUM_USER: '${{ secrets.CHART_REGISTRY_USER }}'
+            CHARTMUSEUM_PASSWORD: ${{ secrets.CHART_REGISTRY_PASSWORD }}
+```
+
+5. CD preparation
+
+Once there is docker image and helm chart with values prepared, it's good to prepare CD workflow that will deploy application into kubernetes cluster. We are assuming that whole environment is not accessible from the internet in any other way than via VPN, so our GitHub runner should be located on a virtual machine with access to it, ideally within same VPC or connected through VPN to environment. Additionally, such virtual machine should have configured access to Kubernetes cluster through proper RBAC policy or any other option that will limit access to the cluster only to deployments.
+
+Once such GitHub runner is configured, it is possible to prepare additional workflow that will handle deployment of the application to DEV and PROD environments. In below example additionally [SOPS](https://github.com/getsops/sops) was configured that is enabling keeping secrets on repository encrypted. To decrypt secrets.yaml files, it is necessary to use eg. AWS KMS, that's why access key and token are provided in last step:
+```
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'etc/helm_values/{{ application_name }}/**'
+  workflow_dispatch:
+
+jobs:
+  dev_deploy:
+    runs-on: dev-runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.1.7
+
+    - name: Add necessary dependencies
+      run: |
+        helm repo add ${{ vars.CHART_REGISTRY_NAME }} ${{ vars.CHART_REGISTRY_URL }} --username '${{ vars.CHART_REGISTRY_USER }}' --password '${{ vars.CHART_REGISTRY_PASSWORD }}'
+        helm repo update ${{ vars.CHART_REGISTRY_NAME }}
+
+    - name: Run Helm upgrade commands
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        helm secrets upgrade {{ application_name }} --install ${{ vars.CHART_REGISTRY_NAME }}/{{ chart_name }} \
+          -n {{ namespace }} \
+          -f etc/helm_values/{{ application_name }}/secrets-dev.yaml \
+          -f etc/helm_values/{{ application_name }}/values-dev.yaml
+```
+
+Once dev deployment will be successful, there can be manual approval process implemented. Below example requires GitHub Enterprise licence, but there are free alternatives on the market.
+
+```
+jobs:
+  prod_deploy_approval:
+    runs-on: ubuntu-latest
+    needs: [ dev_deploy ]
+    environment: prod_approve
+    steps:
+      - name: "Prod deployment approval"
+        run: |
+          echo "Approving deployment to PROD"
+```
+
+In addition, environment needs to be prepared in repository settings. `Settings > Environments > New environment`. After providing environment name (`prod_approve` in above case), please make sure that `Required reviewers` checkbox is enabled and there are people/teams provided. Once it is configured, only manual approval from listed people/teams will enable prod deployment. One downside of such approach is the situation when we are not releasing particular version to production. In such situation workflow will stay in `Waiting` state for 30 days, and after that people from the list will receive notification that this workflow has timed-out.
+
+Code for production deployment should look almost identical to dev_deploy job above. The only difference should be with secrets and values files, and also dedicated production GitHub runner should be used.
+
+With these configuration we managed to prepare basic CI/CD workflow for our application. Improvements can we introduce:
+- introduce GitOps approach using ArgoCD or similar tool
+- extend testing phase during CI process
+- introduce advanced alerting in case of an issue during deployment. Currently only person involved in the process will receive notification from GitHub
+- prepare workflow for rollback in case of issues with new version
+- add more CI checks, like verification of hardcoded secrets in repository (it can be handled with GitHub's Code scanning feature) or additional lint script for aligning with company's coding standard
+- release job that will show on GitHub recent version prepared
+- further use of GitHub's Environment feature. By using it, there is possibility to check history of deployments directly from GitHub
 
 # Data Flow Automation <a name="flow"></a>
 TBD

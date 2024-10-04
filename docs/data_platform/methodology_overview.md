@@ -12,6 +12,7 @@ This chapter focuses on the following key areas:
 - **Agile Practices**:
 - **DevOps integration**:
 - **Release versioning**
+- **SOPS**
 - more TBD
 
 By delving into these concepts, we aim to establish a common understanding that will guide our data platform initiatives and support organization's strategic objectives.
