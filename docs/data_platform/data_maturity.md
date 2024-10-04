@@ -6,7 +6,7 @@
 
 Frequently, data maturity is discussed only from a high-level **what** perspective, which is akin to discussing an illness by only looking at its symptoms. You might see a chart such as this:
 
-![data maturity diagram](../assets/images/data_maturity.png)
+![data maturity diagram](../assets/images/data-platform_data-maturity-curve.png)
 
 While roughly correct, this provides no insight as to what data maturity actually means in practical terms, and more importantly, **how** to achieve higher maturity levels.
 
@@ -24,7 +24,7 @@ $$
 
 Another way to visualize this relationship:
 
-![data maturity diagram](../assets/data_maturity_diagram.png)
+![data maturity diagram](../assets/images/data-platform_data-maturity.png)
 
 Hopefully, we've managed to illustrate that it's impossible to just buy one's way into data maturity, eg. by purchasing latest & greatest technological solutions. Similarly, it's impossible to just will ones way into it: it's possible to run without shoes, but barely running is not the same as competing in running events. Data maturity is a function of both technology and culture, and reaching a high level of analytical maturity requires strategic investment in both areas.
 
