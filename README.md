@@ -25,3 +25,28 @@ rye run mkdocs serve
 ```
 
 The docs will be available at http://127.0.0.1:8000/ (Ctrl+left click to open).
+
+## Exporting markdown page as PDF
+
+### Install pandoc
+
+On Windows, it can be installed using package installer from main pandoc page: https://pandoc.org/installing.html. Alternatively, it can be installed with Chocolatey:
+```
+choco install pandoc
+choco install rsvg-convert miktex
+```
+On MacOS:
+```
+brew install pandoc
+brew install librsvg homebrew/cask/basictex
+```
+
+### Basic usage
+
+```
+pandoc docs/{folder}/{file_name}.md -o {file_name}.pdf --toc --template=docs/assets/dyvenia-template.tex --listings
+```
+
+### Additional commands
+
+Sometimes pandoc is putting image on next page with text from next pargraphs laying above it. In such situation page break command below image will help: `\clearpage`
