@@ -9,9 +9,7 @@ The data engineering lifecycle encompasses the various stages of designing, buil
 
 The data engineering lifecycle is supported by several critical undercurrents, including security, data governance, DataOps, data architecture, orchestration, and software engineering practices. While these foundational concepts are integral to the success and scalability of data engineering workflows, they will not be covered in detail in this document. However, they remain crucial to our overall approach and should be considered throughout every stage of the lifecycle.
 
-**Diagram Placeholder: Data Engineering Lifecycle to be replaced**
-
-![data-engineering-lifecycle](../assets/images/data-platform_data-engineering-lifecycle.png)
+![Data Engineering Lifecycle](../assets/images/data-platform_data-engineering-lifecycle.png)
 
 ---
 
@@ -19,6 +17,9 @@ The data engineering lifecycle is supported by several critical undercurrents, i
 
 Data generation is the first step in the lifecycle, where raw data is created or collected from various sources. These sources can include user activity on applications, sensor data from IoT devices, logs from systems, and external APIs. The goal of this phase is to collect raw, unprocessed data that will be used in downstream processes.
 
+```{=latex}
+\newpage
+```
 #### Key Activities:
 - **Event Logging**: Capturing user or system events.
 - **IoT and Sensor Data**: Collecting data from physical devices.
@@ -26,8 +27,10 @@ Data generation is the first step in the lifecycle, where raw data is created or
 - **Manual Input**: Data entered by users or operators.
 
 **Diagram Placeholder: Data Generation Process**
-![data generation - application database](../assets/images/data-platform_data-generation-application-database.png)
-![data generation - IoT swarm and message queue](../assets/images/data-platform_data-generation-iot-swarm-and-message-queue.png)
+
+![Data Generation - Application Database](../assets/images/data-platform_data-generation-application-database.png)
+
+![Data Generation - IoT Swarm and Message Queue](../assets/images/data-platform_data-generation-iot-swarm-and-message-queue.png)
 
 ---
 
@@ -112,6 +115,7 @@ Reverse ETL is the process of moving data from your centralized data warehouse o
 - **Data Enrichment**: Enhancing third-party tools with enriched or aggregated data from internal systems.
 
 **Diagram Placeholder: Reverse ETL Process**
+
 ![Reverse ETL](../assets/images/data-platform_reverse-etl.png)
 
 ---
