@@ -43,8 +43,9 @@ brew install librsvg homebrew/cask/basictex
 
 ### Basic usage
 
+In order to export markdown file as PDF, such command should be executed from root directory: `data-excellence/`
 ```
-pandoc docs/{folder}/{file_name}.md -o {file_name}.pdf --toc --template=docs/assets/dyvenia-template.tex --listings
+pandoc --from="markdown+rebase_relative_paths" docs/{folder}/{file_name}.md -o {file_name}.pdf --toc --template=docs/assets/dyvenia-template.tex --listings
 ```
 
 ### Additional commands
